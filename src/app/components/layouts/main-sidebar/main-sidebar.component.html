@@ -16,14 +16,14 @@
           class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">İlhan Enes Daniş</a>
+        <a href="#" class="d-block">{{auth.user.name}}</a>
       </div>
     </div>
 
     <!-- SidebarSearch Form -->
     <div class="form-inline">
-      <div class="input-group" >
-        <input class="form-control form-control-sidebar" type="search" [(ngModel)]="search" placeholder="Search" >
+      <div class="input-group">
+        <input class="form-control form-control-sidebar" type="search" [(ngModel)]="search" placeholder="Search">
         <div class="input-group-append">
           <button class="btn btn-sidebar">
             <i class="fas fa-search fa-fw"></i>
@@ -35,38 +35,40 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-       @for (menu of menus |menu:search; track menu) {
+        @for (menu of menus |menu:search; track menu) {
         @if(menu.isTitle){
-          <li class="nav-header">{{menu.name}}</li>
+        <li class="nav-header">{{menu.name}}</li>
         }
         @else if(menu.subMenus.length>0){
-          <li class="nav-item">
-            <a class="nav-link">
-              <i class="nav-icon {{menu.icon}}"></i>
-              <p>{{menu.name}}</p>
-              <i class="right fas fa-angle-left"></i>
-            </a>
-            <ul class="nav nav-treeview">
-              @for (subMenu of menu.subMenus |menu:search; track subMenu) {
-                <li class="nav-item">
-                  <a [routerLink]="subMenu.url" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-                    <i class="{{subMenu.icon}}"></i>
-                    <p class="pl-2">{{subMenu.name}}</p>
-                  </a>
-                </li>
-              }
-            </ul>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="nav-icon {{menu.icon}}"></i>
+            <p>{{menu.name}}</p>
+            <i class="right fas fa-angle-left"></i>
+          </a>
+          <ul class="nav nav-treeview">
+            @for (subMenu of menu.subMenus |menu:search; track subMenu) {
+            <li class="nav-item">
+              <a [routerLink]="subMenu.url" class="nav-link" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}">
+                <i class="{{subMenu.icon}}"></i>
+                <p class="pl-2">{{subMenu.name}}</p>
+              </a>
+            </li>
+            }
+          </ul>
+        </li>
         }
         @else {
-          <li class="nav-item">
-            <a [routerLink]="menu.url" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-              <i class="nav-icon {{menu.icon}}"></i>
-              <p>{{menu.name}}</p>
-            </a>
-          </li>
+        <li class="nav-item">
+          <a [routerLink]="menu.url" class="nav-link" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact:true}">
+            <i class="nav-icon {{menu.icon}}"></i>
+            <p>{{menu.name}}</p>
+          </a>
+        </li>
         }
-       }
+        }
       </ul>
     </nav>
   </div>
